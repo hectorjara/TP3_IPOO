@@ -1,7 +1,7 @@
 <?php
 include_once "Persona.php";
  
-class Notificacion extends Persona{
+class Cliente extends Persona{
 
     private $numeroCliente;
 
