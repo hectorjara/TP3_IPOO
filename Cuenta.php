@@ -5,8 +5,8 @@ Class Cuenta {
 
 	public function __construct($numeroCuenta, $obj_Cliente, $saldo){
 		$this->numeroCuenta = $numeroCuenta;
+        $this->obj_Cliente = $obj_Cliente;
         $this->saldo = $saldo;
-		$this->apellido ;
 	}
 
     public function getnumeroCuenta(){
@@ -35,19 +35,19 @@ Class Cuenta {
     }
 
     public function realizarDeposito($monto){
-        $nuevoSaldo = $this.getSaldo() + $monto;
-        this.setSaldo($nuevoSaldo);
+        $nuevoSaldo = $this->getSaldo() + $monto;
+        $this->setSaldo($nuevoSaldo);
     }
 
     public function realizarRetiro($monto){
-        $nuevoSaldo = $this.getSaldo() - $monto;
-        this.setSaldo($nuevoSaldo);
+        $nuevoSaldo = $this->getSaldo() - $monto;
+        $this->setSaldo($nuevoSaldo);
     }
 		
 	public function __toString(){
-		$cadena = "Nuumero de Cuenta: ". $this->getnumeroCuenta()."\n".
-                  "Cliente: ".$this->getObj_Cliente()."\n".
-                  "Saldo: ".$this->getSaldo().".";
+		$cadena = "Numero de Cuenta: ". $this->getnumeroCuenta()."\n".
+                  "Cliente: ".$this->getObj_Cliente().
+                  "Saldo: ".$this->getSaldo().".\n";
 		return $cadena;
 	}
 	

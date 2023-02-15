@@ -31,9 +31,9 @@ Class Persona {
 	}
 		
 	public function __toString(){
-		$cadena = "Dni: ". $this->getDNI().", Nombre: ".$this->getNombre().", Apellido: ".$this->getApellido().".";
+		$cadena = "Dni: ". $this->getDNI().", Nombre: ".$this->getNombre().", Apellido: ".$this->getApellido().".\n";
 		return $cadena;
 	}
-	
+
 	
 }
