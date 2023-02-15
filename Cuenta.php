@@ -26,9 +26,23 @@ Class Cuenta {
 	public function getSaldo(){
 		return $this->saldo;
 	}
-	public function setsaldo($saldo){
+	public function setSaldo($saldo){
 		$this->saldo = $saldo;
 	}
+
+    public function saldoCuenta(){
+        return $this.getSaldo();
+    }
+
+    public function realizarDeposito($monto){
+        $nuevoSaldo = $this.getSaldo() + $monto;
+        this.setSaldo($nuevoSaldo);
+    }
+
+    public function realizarRetiro($monto){
+        $nuevoSaldo = $this.getSaldo() - $monto;
+        this.setSaldo($nuevoSaldo);
+    }
 		
 	public function __toString(){
 		$cadena = "Nuumero de Cuenta: ". $this->getnumeroCuenta()."\n".
