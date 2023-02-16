@@ -18,10 +18,12 @@ class CuentaCorriente extends Cuenta{
 	}
 
     public function realizarRetiro($monto){
-        if ($monto < $this->getMontoMaximo()){
+        if ($monto < $this->getMontoMaximo()+$this->getSaldo()){
             parent::realizarRetiro($monto);
+			return true;
         }else{
             echo "El monto solicitado es superior al permitido.\n";
+			return false;
         }
     }
 

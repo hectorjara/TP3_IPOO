@@ -98,10 +98,13 @@ Class Banco {
         $cuenta_No_Encontrada = true;
         foreach($this->getcoleccionCuentaCorriente() as $unaCC){            
             if ($numCuenta == $unaCC->getnumeroCuenta()){
-                $unaCC->realizarRetiro($monto);
-                echo "Se ha efectuado el retiro en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
-                $this->setultimoValorCuentaAsignado($unaCC->getSaldo());
-                $cuenta_No_Encontrada = false;
+                if ($unaCC->realizarRetiro($monto)){
+                    echo "Se ha efectuado el retiro en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
+                    $this->setultimoValorCuentaAsignado($unaCC->getSaldo());
+                    $cuenta_No_Encontrada = false;
+                    return true;
+                }else{return false;};
+
             }
 		}
         foreach($this->getcoleccionCajaAhorro() as $unaCA){            
@@ -117,18 +120,25 @@ Class Banco {
         }
     }
 
-
+    public function transferir($cuentaOrigen, $cuentaDestino, $monto){
+        if ($this->realizarRetiro($cuentaOrigen->getnumeroCuenta(), $monto)){
+            $this->realizarDeposito($cuentaDestino->getnumeroCuenta(), $monto);
+            echo "Transferencia exitosa";
+        }else{
+            echo "El monto supera el maximo a girar en descubierto.";
+        }
+    }
 		
 	public function __toString(){
-		$cadena = "Clientes:\n";
+		$cadena = "\nMi Banco\n********\n\nClientes:\n********\n";
         foreach($this->getColeccionCliente() as $unCliente){
 			$cadena=$cadena.$unCliente."\n";
 		}
-        $cadena = $cadena."Cuentas Corrientes:\n";
+        $cadena = $cadena."Cuentas Corrientes:\n*******************\n";
         foreach($this->getcoleccionCuentaCorriente() as $unaCC){
 			$cadena=$cadena.$unaCC."\n";
 		}
-        $cadena = $cadena."Cajas Ahorro:\n";
+        $cadena = $cadena."Cajas de Ahorro:\n****************\n";
         foreach($this->getcoleccionCajaAhorro() as $unaCA){
 			$cadena=$cadena.$unaCA."\n";
 		}
