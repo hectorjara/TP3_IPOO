@@ -1,7 +1,7 @@
 <?php
 Class Producto {
 
-	private $codigoBarra, $descripcion, $stock, $iva, $precioCompra, $obj_Rubro, $precioVenta;
+	private $codigoBarra, $descripcion, $stock, $iva, $precioCompra, $obj_Rubro;
 
 	public function __construct($codigoBarra, $descripcion, $stock, $iva, $precioCompra, $obj_Rubro){
 		$this->codigoBarra = $codigoBarra;
@@ -54,7 +54,7 @@ Class Producto {
 		$this->obj_Rubro = $obj_Rubro;
 	}
 
-    public function getPrecioVenta(){
+    public function darPrecioVenta(){
         $pCompra = $this->getPrecioCompra();
         $ganancia = $pCompra * $this->getObj_Rubro()->getporcentajeGanancia()/100;
         $masIva =  ($pCompra + $ganancia ) * $this->getIva()/100;
@@ -68,7 +68,6 @@ Class Producto {
                   "Stock: ".$this->getStock()."\n".
                   "Iva: ".$this->getIva()."\n".
                   "Precio de Compra: ".$this->getPrecioCompra()."\n".
-                  "Precio de Venta: ".$this->getPrecioVenta()."\n".
                   "Rubro: ".$this->getObj_Rubro()->getdescripcion()."\n";
 		return $cadena;
 	}

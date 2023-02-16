@@ -1,12 +1,12 @@
 <?php
 include_once "Rubro.php";
-include_once "Producto.php";
+include_once "ProductoLocal.php";
 
 $rubroConservas = new Rubro("Conservas", 35);
 $rubroRegalos = new Rubro("Regalos", 55);
 
-$prod_Tomate = new Producto(1111111, "Tomate", 40, 21, 950, $rubroConservas);
-$prod_Robot = new Producto(1111112, "Robot", 5, 21, 6500, $rubroRegalos);
+$prod_Tomate = new ProductoLocal(1111111, "Tomate", 40, 21, 950, $rubroConservas, 10);
+$prod_Robot = new ProductoLocal(1111112, "Robot", 5, 21, 6500, $rubroRegalos, 10);
 
 echo $prod_Tomate;
 echo $prod_Robot;
