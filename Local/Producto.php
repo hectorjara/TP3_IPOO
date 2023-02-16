@@ -56,7 +56,9 @@ Class Producto {
 
     public function getPrecioVenta(){
         $pCompra = $this->getPrecioCompra();
-		return $pCompra + $pCompra * $this->getIva()/100 + $pCompra * $this->getObj_Rubro()->getporcentajeGanancia()/100;
+        $ganancia = $pCompra * $this->getObj_Rubro()->getporcentajeGanancia()/100;
+        $masIva =  ($pCompra + $ganancia ) * $this->getIva()/100;
+		return $pCompra + $ganancia + $masIva ;
 	}
     
 	public function __toString(){
