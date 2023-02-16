@@ -1,7 +1,7 @@
 <?php
 include_once "Producto.php";
  
-class ProductoLocal extends Producto{
+class ProductoRegional extends Producto{
 
 	private $descuento;
 
