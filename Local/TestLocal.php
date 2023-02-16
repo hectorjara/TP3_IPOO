@@ -5,7 +5,7 @@ include_once "Producto.php";
 $rubroConservas = new Rubro("Conservas", 35);
 $rubroRegalos = new Rubro("Regalos", 55);
 
-$prod_Tomate = new Producto(1111111, "Tomate", 40, 21, 14500, $rubroConservas);
+$prod_Tomate = new Producto(1111111, "Tomate", 40, 21, 950, $rubroConservas);
 $prod_Robot = new Producto(1111112, "Robot", 5, 21, 6500, $rubroRegalos);
 
 echo $prod_Tomate;
