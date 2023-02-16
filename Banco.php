@@ -53,11 +53,21 @@ Class Banco {
 
     public function incorporarCuentaCorriente($obj_CuentaCorriente){
         if (!in_array($obj_CuentaCorriente->getObj_Cliente(), $this->getcoleccionCliente())) {
-            echo "La persona no es Cliente del Banco";
+            echo "Apertura CC: La persona no es Cliente del Banco.\n";
         }else{
             $col_Cuentas_Corrientes = $this->getcoleccionCuentaCorriente();
             array_push($col_Cuentas_Corrientes, $obj_CuentaCorriente);
             $this->setcoleccionCuentaCorriente($col_Cuentas_Corrientes);
+        }        
+    }
+
+    public function incorporarCajaAhorro($obj_Caja_Ahorro){
+        if (!in_array($obj_Caja_Ahorro->getObj_Cliente(), $this->getcoleccionCliente())) {
+            echo "Apertura CA: La persona no es Cliente del Banco.\n";
+        }else{
+            $col_Cajas_Ahorro = $this->getcoleccionCajaAhorro();
+            array_push($col_Cajas_Ahorro, $obj_Caja_Ahorro);
+            $this->setcoleccionCajaAhorro($col_Cajas_Ahorro);
         }        
     }
 
@@ -71,6 +81,10 @@ Class Banco {
         $cadena = $cadena."Cuentas Corrientes:\n";
         foreach($this->getcoleccionCuentaCorriente() as $unaCC){
 			$cadena=$cadena.$unaCC."\n";
+		}
+        $cadena = $cadena."Cajas Ahorro:\n";
+        foreach($this->getcoleccionCajaAhorro() as $unaCA){
+			$cadena=$cadena.$unaCA."\n";
 		}
 		return $cadena;
 	}

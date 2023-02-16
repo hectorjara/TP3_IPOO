@@ -75,14 +75,19 @@ echo $cliente3;
 
 $cliente4 = new Cliente(004, 40123456, "Ana", "Mendoza");
 echo $cliente4;
-
+//Creamos 2 Cuentas Corrientes, uno para un cliente del banco y el otro no
 $cuentaCorriente1 = new CuentaCorriente(4321, $cliente1, 10000, 20000);
 echo $cuentaCorriente1;
 $cuentaCorriente4 = new CuentaCorriente(5432, $cliente4, 1000, 12000);
 echo $cuentaCorriente4;
+//Creamos 2 Cajas de Ahorro, uno para un cliente del banco y el otro no
+$cajaAhorro1 = new CajaAhorro(1234, $cliente1, 10000);
+echo $cajaAhorro1;
+$cajaAhorro4 = new CajaAhorro(2345, $cliente4, 1000);
+echo $cajaAhorro4;
 
 $col_CC = [$cuentaCorriente1];
-$col_CA = 0;
+$col_CA = [$cajaAhorro1];
 $valor = 0;
 $col_Clientes = [$cliente1, $cliente2];
 
@@ -93,5 +98,6 @@ echo $unBanco;
 $unBanco->incorporarCuentaCorriente($cuentaCorriente1);
 $unBanco->incorporarCuentaCorriente($cuentaCorriente4);
 
-
+$unBanco->incorporarCajaAhorro($cajaAhorro1);
+$unBanco->incorporarCajaAhorro($cajaAhorro4);
 ?>
