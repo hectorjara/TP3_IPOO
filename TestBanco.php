@@ -155,5 +155,12 @@ $unBanco->realizarDeposito(44444,2000);
 $unBanco->realizarDeposito(1234,2000);
 $unBanco->realizarDeposito(4567,2000);
 
+$unBanco->realizarRetiro(11111,500);
+$unBanco->realizarRetiro(44444,500);
+
+$unBanco->realizarRetiro(1234,500);
+$unBanco->realizarRetiro(4567,500);
+
+$unBanco->realizarRetiro(11111,25000); 
 echo $unBanco;
 ?>

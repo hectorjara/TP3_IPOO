@@ -94,6 +94,29 @@ Class Banco {
         }
     }
 
+    public function realizarRetiro($numCuenta,$monto){
+        $cuenta_No_Encontrada = true;
+        foreach($this->getcoleccionCuentaCorriente() as $unaCC){            
+            if ($numCuenta == $unaCC->getnumeroCuenta()){
+                $unaCC->realizarRetiro($monto);
+                echo "Se ha efectuado el retiro en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
+                $this->setultimoValorCuentaAsignado($monto);
+                $cuenta_No_Encontrada = false;
+            }
+		}
+        foreach($this->getcoleccionCajaAhorro() as $unaCA){            
+            if ($numCuenta == $unaCA->getnumeroCuenta()){
+                $unaCA->realizarRetiro($monto);
+                echo "Se ha efectuado el retiro en la Caja de Ahorro: ".$numCuenta." de ".$unaCA->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
+                $this->setultimoValorCuentaAsignado($monto);
+                $cuenta_No_Encontrada = false;
+            }
+		}
+        if ($cuenta_No_Encontrada){
+            echo "La cuenta numero: ".$numCuenta." no existe en este Banco.\n";
+        }
+    }
+
 
 		
 	public function __toString(){
