@@ -3,8 +3,6 @@ include_once "Cuenta.php";
  
 class CajaAhorro extends Cuenta{
 
-	private $numeroCuenta, $obj_Cliente, $saldo;
-
 	public function __construct($numeroCuenta, $obj_Cliente, $saldo){
 		parent::__construct($numeroCuenta, $obj_Cliente, $saldo);
 	}

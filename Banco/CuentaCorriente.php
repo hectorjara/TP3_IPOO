@@ -3,7 +3,7 @@ include_once "Cuenta.php";
  
 class CuentaCorriente extends Cuenta{
 
-	private $numeroCuenta, $obj_Cliente, $saldo, $montoMaximo;
+	private $montoMaximo;
 
 	public function __construct($numeroCuenta, $obj_Cliente, $saldo, $montoMaximo){
 		parent::__construct($numeroCuenta, $obj_Cliente, $saldo);
