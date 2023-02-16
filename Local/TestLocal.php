@@ -2,6 +2,7 @@
 include_once "Rubro.php";
 include_once "ProductoRegional.php";
 include_once "ProductoImportado.php";
+include_once "Ventas.php";
 
 $rubroConservas = new Rubro("Conservas", 35);
 $rubroRegalos = new Rubro("Regalos", 55);
@@ -12,6 +13,10 @@ $prod_Tomate_Importado = new ProductoImportado(2111111, "Tomate Importado", 40, 
 echo $prod_Tomate;
 echo $prod_Robot;
 echo $prod_Tomate_Importado;
+
+$productosVendidos = [$prod_Tomate, $prod_Robot];
+$nuevaVenta = new Ventas("12-02-2023",$productosVendidos,"Juan Garcia");
+echo $nuevaVenta;
 
 /*
 echo $rubroConservas;

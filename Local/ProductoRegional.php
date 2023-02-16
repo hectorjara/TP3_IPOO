@@ -19,8 +19,8 @@ class ProductoRegional extends Producto{
 
     public function darPrecioVenta(){
         $precioVenta = parent::darPrecioVenta();
-        $this->setdescuento($precioVenta * $this->getdescuento() / 100);
-        return $precioVenta - $this->getdescuento();
+        $desc = $precioVenta * $this->getdescuento() / 100;
+        return $precioVenta - $desc;
     }
 
 	public function __toString(){
