@@ -77,6 +77,7 @@ Class Banco {
             if ($numCuenta == $unaCC->getnumeroCuenta()){
                 $unaCC->realizarDeposito($monto);
                 echo "Se ha efectuado el deposito en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
+                $this->setultimoValorCuentaAsignado($monto);
                 $cuenta_No_Encontrada = false;
             }
 		}
@@ -84,6 +85,7 @@ Class Banco {
             if ($numCuenta == $unaCA->getnumeroCuenta()){
                 $unaCA->realizarDeposito($monto);
                 echo "Se ha efectuado el deposito en la Caja de Ahorro: ".$numCuenta." de ".$unaCA->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
+                $this->setultimoValorCuentaAsignado($monto);
                 $cuenta_No_Encontrada = false;
             }
 		}
@@ -107,6 +109,7 @@ Class Banco {
         foreach($this->getcoleccionCajaAhorro() as $unaCA){
 			$cadena=$cadena.$unaCA."\n";
 		}
+        $cadena=$cadena."Ultimo valor asignado a una cuenta: ".$this->getultimoValorCuentaAsignado().".\n";
 		return $cadena;
 	}
 	
