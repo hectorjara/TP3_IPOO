@@ -3,7 +3,11 @@ include_once "Cliente.php";
 include_once "CajaAhorro.php";
 include_once "CuentaCorriente.php";
 include_once "Banco.php";
+
+
 /*
+Primer prueba
+
 $primerCliente = new Cliente(001, 10123456, "Juan", "Perez");
 echo $primerCliente;
 
@@ -34,6 +38,8 @@ $cuentaCorriente1->realizarRetiro(22000);
 echo $cuentaCorriente1;
 
 */
+/*
+Segunda prueba
 
 $cliente1 = new Cliente(001, 10123456, "Juan", "Perez");
 echo $cliente1;
@@ -56,6 +62,36 @@ $unBanco = new Banco($col_CC, $col_CA, $valor, $col_Clientes);
 $unBanco->incorporarCliente($cliente3);
 $unBanco->incorporarCliente($cliente4);
 echo $unBanco;
+*/
+
+$cliente1 = new Cliente(001, 10123456, "Juan", "Perez");
+echo $cliente1;
+
+$cliente2 = new Cliente(002, 20123456, "Luis", "Garcia");
+echo $cliente2;
+
+$cliente3 = new Cliente(003, 30123456, "Miguel", "Sanchez");
+echo $cliente3;
+
+$cliente4 = new Cliente(004, 40123456, "Ana", "Mendoza");
+echo $cliente4;
+
+$cuentaCorriente1 = new CuentaCorriente(4321, $cliente1, 10000, 20000);
+echo $cuentaCorriente1;
+$cuentaCorriente4 = new CuentaCorriente(5432, $cliente4, 1000, 12000);
+echo $cuentaCorriente4;
+
+$col_CC = [$cuentaCorriente1];
+$col_CA = 0;
+$valor = 0;
+$col_Clientes = [$cliente1, $cliente2];
+
+$unBanco = new Banco($col_CC, $col_CA, $valor, $col_Clientes);
+$unBanco->incorporarCliente($cliente3);
+echo $unBanco;
+
+$unBanco->incorporarCuentaCorriente($cuentaCorriente1);
+$unBanco->incorporarCuentaCorriente($cuentaCorriente4);
 
 
 ?>

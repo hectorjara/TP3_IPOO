@@ -51,12 +51,26 @@ Class Banco {
         $this->setcoleccionCliente($col_Clientes);
     }
 
+    public function incorporarCuentaCorriente($obj_CuentaCorriente){
+        if (!in_array($obj_CuentaCorriente->getObj_Cliente(), $this->getcoleccionCliente())) {
+            echo "La persona no es Cliente del Banco";
+        }else{
+            $col_Cuentas_Corrientes = $this->getcoleccionCuentaCorriente();
+            array_push($col_Cuentas_Corrientes, $obj_CuentaCorriente);
+            $this->setcoleccionCuentaCorriente($col_Cuentas_Corrientes);
+        }        
+    }
+
 
 		
 	public function __toString(){
 		$cadena = "Clientes:\n";
         foreach($this->getColeccionCliente() as $unCliente){
 			$cadena=$cadena.$unCliente."\n";
+		}
+        $cadena = $cadena."Cuentas Corrientes:\n";
+        foreach($this->getcoleccionCuentaCorriente() as $unaCC){
+			$cadena=$cadena.$unaCC."\n";
 		}
 		return $cadena;
 	}
