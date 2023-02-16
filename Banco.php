@@ -77,7 +77,7 @@ Class Banco {
             if ($numCuenta == $unaCC->getnumeroCuenta()){
                 $unaCC->realizarDeposito($monto);
                 echo "Se ha efectuado el deposito en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
-                $this->setultimoValorCuentaAsignado($monto);
+                $this->setultimoValorCuentaAsignado($unaCC->getSaldo());
                 $cuenta_No_Encontrada = false;
             }
 		}
@@ -85,7 +85,7 @@ Class Banco {
             if ($numCuenta == $unaCA->getnumeroCuenta()){
                 $unaCA->realizarDeposito($monto);
                 echo "Se ha efectuado el deposito en la Caja de Ahorro: ".$numCuenta." de ".$unaCA->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
-                $this->setultimoValorCuentaAsignado($monto);
+                $this->setultimoValorCuentaAsignado($unaCA->getSaldo());
                 $cuenta_No_Encontrada = false;
             }
 		}
@@ -100,7 +100,7 @@ Class Banco {
             if ($numCuenta == $unaCC->getnumeroCuenta()){
                 $unaCC->realizarRetiro($monto);
                 echo "Se ha efectuado el retiro en la Cuenta Corriente: ".$numCuenta." de ".$unaCC->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
-                $this->setultimoValorCuentaAsignado($monto);
+                $this->setultimoValorCuentaAsignado($unaCC->getSaldo());
                 $cuenta_No_Encontrada = false;
             }
 		}
@@ -108,7 +108,7 @@ Class Banco {
             if ($numCuenta == $unaCA->getnumeroCuenta()){
                 $unaCA->realizarRetiro($monto);
                 echo "Se ha efectuado el retiro en la Caja de Ahorro: ".$numCuenta." de ".$unaCA->getObj_Cliente()->getNombre()." ".$unaCC->getObj_Cliente()->getApellido().".\n";
-                $this->setultimoValorCuentaAsignado($monto);
+                $this->setultimoValorCuentaAsignado($unaCA->getSaldo());
                 $cuenta_No_Encontrada = false;
             }
 		}
