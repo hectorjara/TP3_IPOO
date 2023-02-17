@@ -28,10 +28,10 @@ $col_Prod_Regional = array($prod_Tomate);
 $miLocal = new Local([], $col_Prod_Regional,[]);
 $miLocal->incorporarProductoLocal($prod_Robot);
 if ($miLocal->incorporarProductoLocal($prod_Tomate_Importado)){
-    echo "Producto Incorporado";
+    echo "Producto Incorporado\n";
 }else{
-    echo "El Producto ya se encuentra registrado";
+    echo "El Producto ya se encuentra registrado\n";
 };
-echo $miLocal;
-
+//echo $miLocal;
+echo "El precio de venta del Producto con el codigo de barra 1111111 es: ".$miLocal->retornarImporteProducto(2111111);
 ?>

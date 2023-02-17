@@ -72,6 +72,31 @@ class Local {
         }
     }
 
+    public function retornarImporteProducto($codBarra){
+		$colPI = $this->getcol_Prod_Imp();        
+        $i = 0;
+        $encontrado = false;
+        while ($i<count($colPI) && !$encontrado){
+            $unProdI = $colPI[$i];
+            $encontrado = $unProdI->getCodigoBarra() == $codBarra;
+            $i++;
+        }
+        if ($encontrado){
+            return $unProdI->darPrecioVenta();
+        }else{
+            $colPR = $this->getcol_Prod_Reg();
+            $i = 0;
+            while ($i<count($colPR) && !$encontrado){
+                $unProdR = $colPR[$i];
+                $encontrado = $unProdR->getCodigoBarra() == $codBarra;
+                $i++;
+            }
+            if ($encontrado){
+                return $unProdR->darPrecioVenta();
+            }
+        }
+	}
+
     public function __toString(){
 		$cadena = "\nMi Tienda\n********\n\nProductos Regionales:\n********************\n";
         foreach($this->getcol_Prod_Reg() as $unProdR){
