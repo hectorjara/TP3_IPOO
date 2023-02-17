@@ -27,6 +27,11 @@ echo $nuevaVenta->darImporteVenta();
 $col_Prod_Regional = array($prod_Tomate);
 $miLocal = new Local([], $col_Prod_Regional,[]);
 $miLocal->incorporarProductoLocal($prod_Robot);
+if ($miLocal->incorporarProductoLocal($prod_Tomate_Importado)){
+    echo "Producto Incorporado";
+}else{
+    echo "El Producto ya se encuentra registrado";
+};
 echo $miLocal;
 
 ?>

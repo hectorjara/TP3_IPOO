@@ -33,12 +33,42 @@ class Local {
     public function incorporarProductoLocal($obj_Producto){
         if ($obj_Producto instanceof ProductoImportado){
             $col_Prod_Impor = $this->getcol_Prod_Imp();
-            array_push($col_Prod_Impor, $obj_Producto);
-            $this->setcol_Prod_Imp($col_Prod_Imp);
+            $encontrado = false;
+            foreach ($col_Prod_Impor as $unProdI) {
+                if ($unProdI->getCodigoBarra() == $obj_Producto->getCodigoBarra()) {
+                    $encontrado = true;
+                    break;
+                }else{
+                    $encontrado = false;
+                }
+              }
+            if (!$encontrado){
+                array_push($col_Prod_Impor, $obj_Producto);
+                $this->setcol_Prod_Imp($col_Prod_Impor);
+                return true;
+            }else{
+                return false;
+            }
+            
         }elseif ($obj_Producto instanceof ProductoRegional){
             $col_Prod_Reg = $this->getcol_Prod_Reg();
-            array_push($col_Prod_Reg, $obj_Producto);
-            $this->setcol_Prod_Reg($col_Prod_Reg);
+            $encontrado = false;
+            foreach ($col_Prod_Reg as $unProdR) {
+                if ($unProdR->getCodigoBarra() == $obj_Producto->getCodigoBarra()) {
+                    $encontrado = true;
+                    break;
+                }else{
+                    $encontrado = false;
+                }
+              }
+            if (!$encontrado){
+                array_push($col_Prod_Reg, $obj_Producto);
+                $this->setcol_Prod_Reg($col_Prod_Reg);
+                return true;
+            }else{
+                return false;
+            }
+            
         }
     }
 
