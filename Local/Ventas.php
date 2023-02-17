@@ -29,13 +29,27 @@ Class Ventas {
 	public function setCliente($cliente){
 		$this->cliente = $cliente;
 	}
+
+    public function darImporteVenta(){
+        $importeVenta = 0;
+        foreach($this->getCol_Productos() as $unProd){
+            $importeVenta = $importeVenta + $unProd->darPrecioVenta();
+        }
+        return $importeVenta;
+    }
 		
 	public function __toString(){
 		$cadena = "Venta:\n*****\n"."Fecha: ". $this->getFecha()."\n";
-        $cadena = $cadena."Productos:\n*********n";
-        foreach($this->getCol_Productos() as $unProd){
-            $cadena=$cadena.$unProd."\n";
+        $cadena = $cadena."Productos:\n*********\n";
+
+        //Cuenta la cantidad de productos:
+        $obj_a_String = array_map('serialize', $this->getCol_Productos());
+        $repeticiones = array_count_values($obj_a_String);
+        foreach ($repeticiones as $obj_a_String => $cantidad){
+            $unProd = unserialize($obj_a_String);//Vuelve de String a Objeto
+            $cadena = $cadena.$unProd."\n"."Cantidad: ".$cantidad."\n\n";
         }
+
         $cadena = $cadena."Cliente: ".$this->getCliente()."\n";
 		return $cadena;
 	}
