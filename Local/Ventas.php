@@ -47,7 +47,7 @@ Class Ventas {
         $repeticiones = array_count_values($obj_a_String);
         foreach ($repeticiones as $obj_a_String => $cantidad){
             $unProd = unserialize($obj_a_String);//Vuelve de String a Objeto
-            $cadena = $cadena.$unProd."\n"."Cantidad: ".$cantidad."\n\n";
+            $cadena = $cadena.$unProd."\n"."Cantidad: ".$cantidad."\n\n"; //Producto y su cantidad
         }
 
         $cadena = $cadena."Cliente: ".$this->getCliente()."\n";
