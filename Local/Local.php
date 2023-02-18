@@ -73,7 +73,7 @@ class Local {
     }
 
     public function retornarImporteProducto($codBarra){
-		$colPI = $this->getcol_Prod_Imp();        
+		$colPI = $this->getcol_Prod_Imp();
         $i = 0;
         $encontrado = false;
         while ($i<count($colPI) && !$encontrado){
@@ -106,6 +106,33 @@ class Local {
 			$costoTotal = $costoTotal + $unProdI->getStock() * $unProdI->getPrecioCompra();
 		}
         return $costoTotal;
+    }
+
+    public function productoMasEcomomico($rubro){
+        $precioMasBarato = 99999999;
+        foreach($this->getcol_Prod_Imp() as $unProdI){
+            $rubroDeProdI = $unProdI->getObj_Rubro();
+            //echo $rubroDeProdI;
+            if ($rubroDeProdI == $rubro){
+                $precio=$unProdI->darPrecioVenta(); 
+                if ($precio < $precioMasBarato ){
+                    $precioMasBarato = $precio;
+                    $prodMasEconomico = $unProdI;
+                }
+            }
+		}
+        foreach($this->getcol_Prod_Reg() as $unProdR){
+            $rubroDeProdR = $unProdR->getObj_Rubro();
+            echo $rubroDeProdR;
+            if($rubroDeProdR == $rubro){
+                $precio=$unProdR->darPrecioVenta();
+                if ($precio < $precioMasBarato ){
+                    $precioMasBarato = $precio;
+                    $prodMasEconomico = $unProdR;
+                }
+            }
+		}
+        return $prodMasEconomico;
     }
 
     public function __toString(){
