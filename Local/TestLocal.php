@@ -33,5 +33,6 @@ if ($miLocal->incorporarProductoLocal($prod_Tomate_Importado)){
     echo "El Producto ya se encuentra registrado\n";
 };
 //echo $miLocal;
-echo "El precio de venta del Producto con el codigo de barra 1111111 es: ".$miLocal->retornarImporteProducto(2111111);
+echo "El precio de venta del Producto con el codigo de barra 1111111 es: ".$miLocal->retornarImporteProducto(2111111)."\n";
+echo "El costo total de los productos en stock es: ".$miLocal->retornarCostoProductoLocal()."\n";
 ?>

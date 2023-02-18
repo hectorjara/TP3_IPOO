@@ -97,6 +97,17 @@ class Local {
         }
 	}
 
+    public function retornarCostoProductoLocal(){
+        $costoTotal = 0;
+        foreach($this->getcol_Prod_Reg() as $unProdR){
+			$costoTotal = $costoTotal + $unProdR->getStock() * $unProdR->getPrecioCompra();
+		}
+        foreach($this->getcol_Prod_Imp() as $unProdI){
+			$costoTotal = $costoTotal + $unProdI->getStock() * $unProdI->getPrecioCompra();
+		}
+        return $costoTotal;
+    }
+
     public function __toString(){
 		$cadena = "\nMi Tienda\n********\n\nProductos Regionales:\n********************\n";
         foreach($this->getcol_Prod_Reg() as $unProdR){
