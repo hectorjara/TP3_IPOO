@@ -203,6 +203,22 @@ class Local {
         return $total / $cant;
     }
 
+    public function informarConsumoCliente($tipoDoc, $numDoc){
+        $colProdCompDeUnCliente = array();
+        $colVentas = $this->getcol_Prod_Ventas();
+        foreach ($colVentas as $unaVenta){
+            $clienteDeUnaVenta = $unaVenta->getCliente();
+            $tipoDocDeCDUV = $clienteDeUnaVenta->getTipoDoc();
+            $numDocDeCDUV = $clienteDeUnaVenta->getNumDoc();
+            if ($tipoDocDeCDUV == $tipoDoc && $numDocDeCDUV == $numDoc){
+                $colProductosComprados = $unaVenta->getCol_Productos();
+                foreach ($colProductosComprados as $unProdComprado){
+                    array_push($colProdCompDeUnCliente,$unProdComprado);
+                }                
+            }
+        }
+        return $colProdCompDeUnCliente;
+    }
 
 
     public function __toString(){

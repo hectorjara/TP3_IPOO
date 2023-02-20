@@ -4,6 +4,7 @@ include_once "ProductoRegional.php";
 include_once "ProductoImportado.php";
 include_once "Ventas.php";
 include_once "Local.php";
+include_once "Cliente.php";
 
 $rubroConservas = new Rubro("Conservas", 35);
 $rubroRegalos = new Rubro("Regalos", 55);
@@ -18,13 +19,14 @@ $prod_Robot_Importado = new ProductoImportado(2111112, "Robot Importado", 6, 21,
 //echo $prod_Tomate;
 //echo $prod_Robot;
 //echo $prod_Tomate_Importado;
-
+$cliente1 = new Cliente("DNI", 13123456);
+$cliente2 = new Cliente("DNI", 12123456);
 $productosVendidos1= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Tomate_Importado];
-$productosVendidos2= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Robot_Importado, $prod_Robot_Importado];
+$productosVendidos2= [$prod_Tomate, $prod_Robot, $prod_Tomate];
 $productosVendidos3= [$prod_Tomate, $prod_Tomate, $prod_Tomate, $prod_Robot_Importado]; //El lector del codigo barra cada producto uno por uno
-$venta1 = new Ventas("12-02-2023",$productosVendidos1,"Juan Garcia");
-$venta2 = new Ventas("13-02-2023",$productosVendidos2,"Juan Garcia");
-$venta3 = new Ventas("12-02-2023",$productosVendidos3,"Juan Garcia");
+$venta1 = new Ventas("12-02-2023",$productosVendidos1,$cliente1);
+$venta2 = new Ventas("13-02-2023",$productosVendidos2,$cliente1);
+$venta3 = new Ventas("12-02-2023",$productosVendidos3,$cliente2);
 /*
 echo $venta1;
 echo $venta1->darImporteVenta();
@@ -65,4 +67,13 @@ if ($col_los_n_mas_vendidos_del_anio){
 }
 
 echo "\nEl promedio total en precio de ventas de productos importados vendidos es: ". $miLocal->promedioVentasImportados()."\n";
+$tipoDoc="DNI";
+$numDoc=13123456;
+echo "Todos los productos comprados por el cliente con: ".$tipoDoc." : ".$numDoc." son:\n";
+$colProdCompDeUnCliente = $miLocal->informarConsumoCliente($tipoDoc, $numDoc);
+$productosUnicosCDUC = array_unique($colProdCompDeUnCliente);
+foreach ($productosUnicosCDUC as $prodComprado){
+    echo "Son en total ". count($productosUnicosCDUC). " productos:\n";
+    echo $prodComprado;
+}
 ?>

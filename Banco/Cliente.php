@@ -19,7 +19,7 @@ class Cliente extends Persona{
 
 	public function __toString(){
 
-        $cadena = "Numero de Cliente: ".$this->numeroCliente.", ";
+        $cadena = "Numero de Cliente: ".$this->getNumeroCliente().", ";
 		$cadena.= parent::__toString();
         return $cadena;    
 	}

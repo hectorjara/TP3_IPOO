@@ -50,7 +50,7 @@ Class Ventas {
             $cadena = $cadena.$unProd."\n"."Cantidad: ".$cantidad."\n\n"; //Producto y su cantidad
         }
 
-        $cadena = $cadena."Cliente: ".$this->getCliente()."\n";
+        $cadena = $cadena."Cliente: ".$this->getCliente()->getTipoDoc().": ".$this->getCliente()->getNumDoc()."\n";
 		return $cadena;
 	}
 }
