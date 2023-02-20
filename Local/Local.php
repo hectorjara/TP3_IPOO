@@ -179,8 +179,28 @@ class Local {
             return $col_los_n_mas_vendidos;
         }else {
             return false;
-            //echo "La cantidad de productos no es tan grande como el numero solicitado.";
         }
+    }
+
+
+    public function promedioVentasImportados(){
+        $colVentas = $this->getcol_Prod_Ventas();
+        $colProdInpVendidos =array();
+        foreach ($colVentas as $unaVenta){
+            $colProd = $unaVenta->getCol_Productos();
+            foreach ($colProd as $unProd){
+                if ($unProd instanceof ProductoImportado){
+                    array_push($colProdInpVendidos, $unProd);
+                }
+            }
+        }
+        $cant=0;
+        $total=0;
+        foreach($colProdInpVendidos as $prodIV){
+            $total = $total + $prodIV->darPrecioVenta();
+            $cant++;
+        }
+        return $total / $cant;
     }
 
 

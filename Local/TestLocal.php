@@ -19,7 +19,7 @@ $prod_Robot_Importado = new ProductoImportado(2111112, "Robot Importado", 6, 21,
 //echo $prod_Robot;
 //echo $prod_Tomate_Importado;
 
-$productosVendidos1= [$prod_Tomate, $prod_Robot, $prod_Tomate];
+$productosVendidos1= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Tomate_Importado];
 $productosVendidos2= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Robot_Importado, $prod_Robot_Importado];
 $productosVendidos3= [$prod_Tomate, $prod_Tomate, $prod_Tomate, $prod_Robot_Importado]; //El lector del codigo barra cada producto uno por uno
 $venta1 = new Ventas("12-02-2023",$productosVendidos1,"Juan Garcia");
@@ -64,5 +64,5 @@ if ($col_los_n_mas_vendidos_del_anio){
     echo "La cantidad de productos no es tan grande como el numero solicitado.";
 }
 
-
+echo "\nEl promedio total en precio de ventas de productos importados vendidos es: ". $miLocal->promedioVentasImportados()."\n";
 ?>
