@@ -135,6 +135,56 @@ class Local {
         return $prodMasEconomico;
     }
 
+    public function informarProductosMasVendidos($anio, $n){
+        $colProdVendEnElAnio =array();
+        $colVentas = $this->getcol_Prod_Ventas();
+        foreach($colVentas as $unaVenta){
+			$fechaVenta =  $unaVenta->getFecha();
+            $anioVenta = date('Y', strtotime($fechaVenta));
+            if ($anioVenta == $anio){
+                $colProddelaVenta = $unaVenta->getCol_Productos();
+                foreach ($colProddelaVenta as $unProddelaVenta){
+                    array_push($colProdVendEnElAnio, $unProddelaVenta);
+                }
+            }
+		}
+
+        $col_ProductosYCantidad_anio = array(); //Nuevo arreglo Bidimensional Producto y Cantidad
+
+        foreach ($colProdVendEnElAnio as $unProdVendEnElanio){ //Recorre el primer arreglo
+            $encontrado = false;
+            foreach ($col_ProductosYCantidad_anio as &$un_PYC_anio){
+                if ($un_PYC_anio[0] === $unProdVendEnElanio){
+                    $un_PYC_anio[1]++;
+                    $encontrado = true; //Y solo cambia el segundo arreglo una vez cada foreach del primero
+                    break;
+                }
+            }
+            if (!$encontrado){
+                $col_ProductosYCantidad_anio[] = array($unProdVendEnElanio, 1);
+            }
+        }
+        //Ordenas el nuevo arreglo bidimensional de acuerdo a la cantidad
+        usort($col_ProductosYCantidad_anio, function($a, $b) {
+            if ($a[1] == $b[1]) {
+                return 0;
+            }
+            return ($a[1] < $b[1]) ? 1 : -1;
+        });
+
+        $cantDeProductos = count($col_ProductosYCantidad_anio, COUNT_NORMAL);
+
+        if ($cantDeProductos >= $n){
+            $col_los_n_mas_vendidos = array_slice($col_ProductosYCantidad_anio, 0, $n);
+            return $col_los_n_mas_vendidos;
+        }else {
+            return false;
+            //echo "La cantidad de productos no es tan grande como el numero solicitado.";
+        }
+    }
+
+
+
     public function __toString(){
 		$cadena = "\nMi Tienda\n********\n\nProductos Regionales:\n********************\n";
         foreach($this->getcol_Prod_Reg() as $unProdR){

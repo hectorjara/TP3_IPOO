@@ -19,21 +19,26 @@ $prod_Robot_Importado = new ProductoImportado(2111112, "Robot Importado", 6, 21,
 //echo $prod_Robot;
 //echo $prod_Tomate_Importado;
 
-$productosVendidos = [$prod_Tomate, $prod_Robot, $prod_Tomate];
-$nuevaVenta = new Ventas("12-02-2023",$productosVendidos,"Juan Garcia");
+$productosVendidos1= [$prod_Tomate, $prod_Robot, $prod_Tomate];
+$productosVendidos2= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Robot_Importado, $prod_Robot_Importado];
+$productosVendidos3= [$prod_Tomate, $prod_Tomate, $prod_Tomate, $prod_Robot_Importado]; //El lector del codigo barra cada producto uno por uno
+$venta1 = new Ventas("12-02-2023",$productosVendidos1,"Juan Garcia");
+$venta2 = new Ventas("13-02-2023",$productosVendidos2,"Juan Garcia");
+$venta3 = new Ventas("12-02-2023",$productosVendidos3,"Juan Garcia");
 /*
-echo $nuevaVenta;
-echo $nuevaVenta->darImporteVenta();
+echo $venta1;
+echo $venta1->darImporteVenta();
 */
 $col_Prod_Regional = array($prod_Tomate);
-$miLocal = new Local([], $col_Prod_Regional,[]);
+$col_Ventas = array($venta1, $venta2, $venta3);
+
+$miLocal = new Local([], $col_Prod_Regional,$col_Ventas);
 $miLocal->incorporarProductoLocal($prod_Robot);
 if ($miLocal->incorporarProductoLocal($prod_Tomate_Importado)){
     echo "Producto Incorporado\n";
 }else{
     echo "El Producto ya se encuentra registrado\n";
 };
-
 if ($miLocal->incorporarProductoLocal($prod_Robot_Importado)){
     echo "Producto Incorporado\n";
 }else{
@@ -45,4 +50,19 @@ echo "El precio de venta del Producto con el codigo de barra 1111111 es: ".$miLo
 echo "El costo total de los productos en stock es: ".$miLocal->retornarCostoProductoLocal()."\n";
 echo "El Producto mas barato del rubro Conservas es:\n ".$miLocal->productoMasEcomomico($rubroConservas)."\n";
 echo "El Producto mas barato del rubro Regalos es:\n ".$miLocal->productoMasEcomomico($rubroRegalos)."\n";
+
+// informarProductosMasVendidos
+
+$n = 3; $anio = 2023;
+$col_los_n_mas_vendidos_del_anio = $miLocal->informarProductosMasVendidos($anio, $n);
+if ($col_los_n_mas_vendidos_del_anio){
+    echo "Los ".$n." productos mas vendidos del año ".$anio." son:\n";
+    foreach ($col_los_n_mas_vendidos_del_anio as $topAnio){
+        echo $topAnio[0]." ".$topAnio[1]. " cantidad de veces vendidas\n";
+    }
+}else{
+    echo "La cantidad de productos no es tan grande como el numero solicitado.";
+}
+
+
 ?>
