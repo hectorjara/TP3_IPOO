@@ -38,6 +38,14 @@ Class Venta {
 		$this->obj_Cliente = $obj_Cliente;
 	}
 
+	public function darImporteVenta(){
+		$PT = $this->getObj_PT();
+		$cantDias = $PT->getCantDias();
+		$valorPorDiaYPas = $PT->getDestino()->getValorPorDiaYPas();
+		$importeVenta = $cantDias * $valorPorDiaYPas * $this->getCantPersonas();
+		return $importeVenta;
+	}
+
 	public function __toString(){
 		$cadena = "Venta:\n*****\n".
                   "Fecha: ". $this->getFechaVenta()."\n\n".
