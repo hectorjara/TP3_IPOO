@@ -31,7 +31,8 @@ Class Destino {
 	}
 		
 	public function __toString(){
-		$cadena = "identificacion: ". $this->getIdentificacion().
+		$cadena = "Destino:\n*******\n".
+                  "identificacion: ". $this->getIdentificacion().
                   "\nNombre del Lugar: ".$this->getNombreLugar().
                   "\nValor por dia y pasajero: $".$this->getValorPorDiaYPas()."\n";
 		return $cadena;
