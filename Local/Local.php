@@ -45,9 +45,9 @@ class Local {
             if (!$encontrado){
                 array_push($col_Prod_Impor, $obj_Producto);
                 $this->setcol_Prod_Imp($col_Prod_Impor);
-                return true;
+                echo "El producto '".$obj_Producto->getDescripcion()."' ha sido incorporado\n";
             }else{
-                return false;
+                echo "El producto '".$obj_Producto->getDescripcion()."' ya se encuentra registrado\n";
             }
             
         }elseif ($obj_Producto instanceof ProductoRegional){
@@ -64,9 +64,9 @@ class Local {
             if (!$encontrado){
                 array_push($col_Prod_Reg, $obj_Producto);
                 $this->setcol_Prod_Reg($col_Prod_Reg);
-                return true;
+                echo "El producto '".$obj_Producto->getDescripcion()."' ha sido incorporado\n";
             }else{
-                return false;
+                echo "El producto '".$obj_Producto->getDescripcion()."' ya se encuentra registrado\n";
             }
             
         }
