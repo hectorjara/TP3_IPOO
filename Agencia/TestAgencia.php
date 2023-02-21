@@ -4,6 +4,7 @@ include_once "PaqueteTuristico.php";
 include_once "Venta.php";
 include_once "VentaOnLine.php";
 include_once "Cliente.php";
+include_once "Agencia.php";
 
 //Se crea una instancia de la clase Destino
 $destinoBariloche = new Destino("001", "Bariloche", 250);
@@ -18,4 +19,10 @@ echo $ventaBariloche;
 echo $ventaOnLineBariloche;
 echo "El importe de la venta es: $".$ventaBariloche->darImporteVenta()."\n";
 echo "El importe de la venta online es: $".$ventaOnLineBariloche->darImporteVenta()."\n";
+
+$colPT = [$paqueteBariloche];
+$colVentas = [$ventaBariloche];
+$colVentasOL = [$ventaOnLineBariloche];
+$miAgencia = new Agencia($colPT, $colVentas, $colVentasOL); //$colPT, $colVentas, $colVentasOL
+echo $miAgencia;
 ?>
