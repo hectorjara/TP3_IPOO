@@ -47,13 +47,12 @@ Class PaqueteTuristico {
     }
 
 	public function __toString(){
-		$cadena = "Paquete Turistico:\n*****************\n".
+		$cadena = "Paquete Turistico ".$this->getDestino()->getNombreLugar()."\n".
                   "Fecha: ". $this->getFechaDesde()."\n".
                   "Cantidad de dias: ".$this->getCantDias()."\n".
                   "Destino: ".$this->getDestino()->getNombreLugar()."\n".
                   "Cantidad total de plazas: ".$this->getTotalPlazas()."\n";
                   "Cantidad de plazas disponibles: ".$this->getPlazasDisponibles()."\n";
 		return $cadena;
-	}
-	
+	}	
 }
