@@ -2,9 +2,7 @@
 include_once "Rubro.php";
 include_once "ProductoRegional.php";
 include_once "ProductoImportado.php";
-include_once "Ventas.php";
 include_once "Local.php";
-include_once "Cliente.php";
 
 //Se crean 2 rubros
 $rubroConservas = new Rubro("Conservas", 35);
