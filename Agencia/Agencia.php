@@ -30,6 +30,27 @@ class Agencia {
         $this->colVentasOL = $colVentasOL;
     }
 
+
+    public function incorporarPaquete($obj_PT){
+        $colPT = $this->getColPT();
+        $paqueteYaIngresado = false;
+        foreach($colPT as $unOPT){
+            if ($unOPT->getFechaDesde() == $obj_PT->getFechaDesde() && $unOPT->getDestino() == $obj_PT->getDestino()){
+                $paqueteYaIngresado = true;
+                break;
+            }else{
+                $paqueteYaIngresado = false;
+            }
+        }
+        if (!$paqueteYaIngresado){
+            array_push($colPT, $obj_PT);
+            $this->setColPT($colPT);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function __toString(){
 		$cadena = "\nMi Agencia\n**********\n\nPaquetes Turisticos:\n*******************\n";
         foreach($this->getColPT() as $unPT){
