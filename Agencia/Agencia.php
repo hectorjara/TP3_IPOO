@@ -30,7 +30,6 @@ class Agencia {
         $this->colVentasOL = $colVentasOL;
     }
 
-
     public function incorporarPaquete($obj_PT){
         $colPT = $this->getColPT();
         $paqueteYaIngresado = false;
@@ -48,6 +47,23 @@ class Agencia {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function incorporarVenta($objPT,$tipoDoc,$numDoc,$cantPersonas, $esOnLine){
+        $plazasDisponibles = $objPT->getPlazasDisponibles();
+        if ($cantPersonas <= $plazasDisponibles){
+            if ($esOnLine){
+                $nuevaVenta = new VentaOnLine(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+            }else{
+                $nuevaVenta = new Venta(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+            }
+            $objPT->setPlazasDisponibles($plazasDisponibles-$cantPersonas);
+            $colVentas = $this->getColVentas();
+            array_push($colVentas, $nuevaVenta);
+            return $nuevaVenta->darImporteVenta();
+        }else{
+            return -1;
         }
     }
 

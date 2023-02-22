@@ -5,8 +5,8 @@ class VentaOnLine extends Venta{
 
 	private $descuento;
 
-	public function __construct($fechaVenta, $obj_PT, $cantPersonas, $obj_Cliente, $descuento){
-		parent::__construct($fechaVenta, $obj_PT, $cantPersonas, $obj_Cliente, $obj_Rubro);
+	public function __construct($fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc, $descuento=20){
+		parent::__construct($fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc);
         $this->descuento = $descuento;
 	}
 

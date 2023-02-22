@@ -42,8 +42,8 @@ Class PaqueteTuristico {
     public function getPlazasDisponibles(){
        return $this->plazasDisponibles;
 	}
-    public function setPlazasDisponibles(){
-        //return $this->plazasDisponibles;
+    public function setPlazasDisponibles($plazasDisponibles){
+        $this->plazasDisponibles = $plazasDisponibles;
     }
 
 	public function __toString(){

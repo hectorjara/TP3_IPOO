@@ -1,13 +1,14 @@
 <?php
 Class Venta {
 
-	private $fechaVenta, $obj_PT, $cantPersonas, $obj_Cliente;
+	private $fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc;
 
-	public function __construct($fechaVenta, $obj_PT, $cantPersonas, $obj_Cliente){
+	public function __construct($fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
 		$this->fechaVenta = $fechaVenta;
         $this->obj_PT = $obj_PT;
         $this->cantPersonas = $cantPersonas;
-        $this->obj_Cliente = $obj_Cliente;
+        $this->tipoDoc = $tipoDoc;
+		$this->numDoc = $numDoc;
 	}
 
     public function getFechaVenta(){
@@ -31,11 +32,18 @@ Class Venta {
 		$this->cantPersonas = $cantPersonas;
 	}
 
-    public function getObj_Cliente(){
-		return $this->obj_Cliente;
+    public function getTipoDoc(){
+		return $this->tipoDoc;
 	}
-	public function setObj_Cliente($obj_Cliente){
-		$this->obj_Cliente = $obj_Cliente;
+	public function setTipoDoc($tipoDoc){
+		$this->tipoDoc = $tipoDoc;
+	}
+
+	public function getNumDoc(){
+		return $this->numDoc;
+	}
+	public function setNumDoc($numDoc){
+		$this->numDoc = $numDoc;
 	}
 
 	public function darImporteVenta(){
@@ -51,7 +59,7 @@ Class Venta {
                   "Fecha: ". $this->getFechaVenta()."\n\n".
                   "Paquete Turistico:\n".$this->getObj_PT()."\n".
                   "Cantidad de personas: ".$this->getCantPersonas()."\n".
-                  "Cliente: ".$this->getObj_Cliente()->getTipoDoc().": ".$this->getObj_Cliente()->getNumDoc()."\n";
+                  $this->getTipoDoc().": ".$this->getNumDoc()."\n";
 		return $cadena;
 	}	
 }
