@@ -23,9 +23,9 @@ echo "El importe de la venta online es: $".$ventaOnLineBariloche->darImporteVent
 */
 
 $colPT = [$paqueteBariloche];
-$colVentas = [$ventaBariloche];
+//$colVentas = [$ventaBariloche];
 $colVentasOL = [$ventaOnLineBariloche];
-$miAgencia = new Agencia($colPT, $colVentas, $colVentasOL); //$colPT, $colVentas, $colVentasOL
+$miAgencia = new Agencia($colPT, [], $colVentasOL); //$colPT, $colVentas, $colVentasOL
 
 //Incorporar Paquete
 if ($miAgencia->incorporarPaquete($paqueteBariloche2)){ echo "Paquete incorporado\n"; }else{echo "Ya existe un paquete con la misma fecha inicial y destino\n";}
@@ -44,6 +44,10 @@ $precio = $miAgencia->incorporarVenta($paqueteBariloche,"DNI",27898654,30, false
 if ($precio >= 0){
     echo "Venta confirmada. El importe a pagar es: $".$precio."\n";
 }else{echo "No hay plazas suficientes\n";}
+
+
+//informarPaquetesTuristicos(fecha,destino):
+
 
 echo $miAgencia;
 ?>

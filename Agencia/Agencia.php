@@ -53,18 +53,27 @@ class Agencia {
     public function incorporarVenta($objPT,$tipoDoc,$numDoc,$cantPersonas, $esOnLine){
         $plazasDisponibles = $objPT->getPlazasDisponibles();
         if ($cantPersonas <= $plazasDisponibles){
+            $objPT->setPlazasDisponibles($plazasDisponibles - $cantPersonas);
             if ($esOnLine){
                 $nuevaVenta = new VentaOnLine(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $colVentasOL = $this->getColVentasOL();
+                array_push($colVentasOL, $nuevaVenta);
+                $this->setColVentasOL($colVentasOL);
+                return $nuevaVenta->darImporteVenta();
             }else{
                 $nuevaVenta = new Venta(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $colVentas = $this->getColVentas();
+                array_push($colVentas, $nuevaVenta);
+                $this->setColVentas($colVentas);
+                return $nuevaVenta->darImporteVenta();
             }
-            $objPT->setPlazasDisponibles($plazasDisponibles-$cantPersonas);
-            $colVentas = $this->getColVentas();
-            array_push($colVentas, $nuevaVenta);
-            return $nuevaVenta->darImporteVenta();
         }else{
             return -1;
         }
+    }
+
+    public function informarPaquetesTuristicos($fecha, $destino){
+        $colPT = $this->getColPT();
     }
 
     public function __toString(){
