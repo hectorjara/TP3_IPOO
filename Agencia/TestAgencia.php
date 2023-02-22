@@ -47,7 +47,11 @@ if ($precio >= 0){
 
 
 //informarPaquetesTuristicos(fecha,destino):
+$colPTconFechaYDestino = $miAgencia->informarPaquetesTuristicos("3/05/2014", $destinoBariloche);
+foreach ($colPTconFechaYDestino as $unPTFYD){
+    echo $unPTFYD;
+}
 
 
-echo $miAgencia;
+//echo $miAgencia;
 ?>

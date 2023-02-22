@@ -55,13 +55,13 @@ class Agencia {
         if ($cantPersonas <= $plazasDisponibles){
             $objPT->setPlazasDisponibles($plazasDisponibles - $cantPersonas);
             if ($esOnLine){
-                $nuevaVenta = new VentaOnLine(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $nuevaVenta = new VentaOnLine(date("d/m/Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
                 $colVentasOL = $this->getColVentasOL();
                 array_push($colVentasOL, $nuevaVenta);
                 $this->setColVentasOL($colVentasOL);
                 return $nuevaVenta->darImporteVenta();
             }else{
-                $nuevaVenta = new Venta(date("d-m-y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $nuevaVenta = new Venta(date("d/m/Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
                 $colVentas = $this->getColVentas();
                 array_push($colVentas, $nuevaVenta);
                 $this->setColVentas($colVentas);
@@ -74,6 +74,13 @@ class Agencia {
 
     public function informarPaquetesTuristicos($fecha, $destino){
         $colPT = $this->getColPT();
+        $coleccionFiltradaPT= array();
+        foreach ($colPT as $unPaqTur){
+            if ($unPaqTur->getFechaDesde() == $fecha && $unPaqTur->getDestino() == $destino){
+                array_push($coleccionFiltradaPT, $unPaqTur);
+            }
+        }
+        return $coleccionFiltradaPT;
     }
 
     public function __toString(){
