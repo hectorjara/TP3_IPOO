@@ -9,7 +9,7 @@ include_once "Agencia.php";
 $destinoBariloche = new Destino("001", "Bariloche", 250);
 //echo $destinoBariloche;
 $paqueteBariloche = new PaqueteTuristico("23/05/2014", 3, $destinoBariloche, 25);//$fechaDesde, $cantDias, $destino, $totalPlazas
-$paqueteBariloche2 = new PaqueteTuristico("3/05/2014", 3, $destinoBariloche, 10);
+$paqueteBariloche2 = new PaqueteTuristico("3/05/2014", 2, $destinoBariloche, 10);
 $paqueteBariloche3 = new PaqueteTuristico("3/05/2014", 4, $destinoBariloche, 15);
 //echo $paqueteBariloche;
 
@@ -51,6 +51,9 @@ $colPTconFechaYDestino = $miAgencia->informarPaquetesTuristicos("3/05/2014", $de
 foreach ($colPTconFechaYDestino as $unPTFYD){
     echo $unPTFYD;
 }
+
+//paqueteMasEcomomico(fecha,destino)
+echo "El Paquete Turistico mas economico es:\n".$miAgencia->paqueteMasEcomomico("23/05/2014",$destinoBariloche)."\n";
 
 
 //echo $miAgencia;

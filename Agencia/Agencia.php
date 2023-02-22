@@ -83,6 +83,23 @@ class Agencia {
         return $coleccionFiltradaPT;
     }
 
+    public function paqueteMasEcomomico($fecha, $destino){
+        $colPT = $this->getColPT();
+        $precioMasEconomico= 9999999;        
+        foreach ($colPT as $unPaqTur){
+            if ($unPaqTur->getFechaDesde() == $fecha && $unPaqTur->getDestino() == $destino){
+                $valorPorDia = $unPaqTur->getDestino()->getValorPorDiaYPas();
+                $cantDias = $unPaqTur->getCantDias();
+                $precioPaquete = $valorPorDia * $cantDias;
+                if ($precioPaquete < $precioMasEconomico){
+                    $paqueteMasEconomico = $unPaqTur;
+                    $precioMasEconomico = $precioPaquete;
+                }
+            }            
+        }
+        return $paqueteMasEconomico;
+    }
+
     public function __toString(){
 		$cadena = "\nMi Agencia\n**********\n\nPaquetes Turisticos:\n*******************\n";
         foreach($this->getColPT() as $unPT){
