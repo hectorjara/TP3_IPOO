@@ -47,3 +47,4 @@ Class Funcion {
 		return $cadena;
 	}	
 }
+?>
