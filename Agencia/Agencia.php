@@ -55,13 +55,13 @@ class Agencia {
         if ($cantPersonas <= $plazasDisponibles){
             $objPT->setPlazasDisponibles($plazasDisponibles - $cantPersonas);
             if ($esOnLine){
-                $nuevaVenta = new VentaOnLine(date("d/m/Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $nuevaVenta = new VentaOnLine(date("d-m-Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
                 $colVentasOL = $this->getColVentasOL();
                 array_push($colVentasOL, $nuevaVenta);
                 $this->setColVentasOL($colVentasOL);
                 return $nuevaVenta->darImporteVenta();
             }else{
-                $nuevaVenta = new Venta(date("d/m/Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
+                $nuevaVenta = new Venta(date("d-m-Y"), $objPT, $cantPersonas, $tipoDoc, $numDoc); //$fechaVenta, $obj_PT, $cantPersonas, $tipoDoc, $numDoc){
                 $colVentas = $this->getColVentas();
                 array_push($colVentas, $nuevaVenta);
                 $this->setColVentas($colVentas);
@@ -117,6 +117,60 @@ class Agencia {
             }
         }
         return $colPTAdquiridosPorC;
+    }
+
+    public function informarPaquetesMasVendido($anio, $n){
+        $colPaqtVendEnElAnio =array();
+        $colVentas = $this->getColVentas();
+        foreach($colVentas as $unaVenta){
+			$fechaVenta =  $unaVenta->getFechaVenta();
+            $anioVenta = date('Y', strtotime($fechaVenta));
+            if ($anioVenta == $anio){
+                $objPTdeLaVenta = $unaVenta->getObj_PT();
+                array_push($colPaqtVendEnElAnio, $objPTdeLaVenta);
+            }
+		}
+        $colVentasOL = $this->getColVentasOL();
+        foreach($colVentasOL as $unaVenta){
+			$fechaVenta =  $unaVenta->getFechaVenta();
+            $anioVenta = date('Y', strtotime($fechaVenta));
+            if ($anioVenta == $anio){
+                $objPTdeLaVentaOL = $unaVenta->getObj_PT();
+                array_push($colPaqtVendEnElAnio, $objPTdeLaVentaOL);
+            }
+		}
+
+        $col_PTyCant = array(); //Nuevo arreglo Bidimensional Producto y Cantidad
+
+        foreach ($colPaqtVendEnElAnio as $unPTVenEnElAnio){ //Recorre el primer arreglo
+            $encontrado = false;
+            foreach ($col_PTyCant as &$unPTYC){
+                if ($unPTYC[0] === $unPTVenEnElAnio){
+                    $unPTYC[1]++;
+                    $encontrado = true; //Y solo cambia el segundo arreglo una vez cada foreach del primero
+                    break;
+                }
+            }
+            if (!$encontrado){
+                $col_PTyCant[] = array($unPTVenEnElAnio, 1);
+            }
+        }
+        //Ordenas el nuevo arreglo bidimensional de acuerdo a la cantidad
+        usort($col_PTyCant, function($a, $b) {
+            if ($a[1] == $b[1]) {
+                return 0;
+            }
+            return ($a[1] < $b[1]) ? 1 : -1;
+        });
+
+        $cantPT = count($col_PTyCant, COUNT_NORMAL);
+
+        if ($cantPT >= $n){
+            $col_los_n_mas_vendidos = array_slice($col_PTyCant, 0, $n);
+            return $col_los_n_mas_vendidos;
+        }else {
+            return false;
+        }
     }
 
     public function __toString(){
