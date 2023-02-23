@@ -51,7 +51,7 @@ Class PaqueteTuristico {
                   "Fecha: ". $this->getFechaDesde()."\n".
                   "Cantidad de dias: ".$this->getCantDias()."\n".
                   "Destino: ".$this->getDestino()->getNombreLugar()."\n".
-                  "Cantidad total de plazas: ".$this->getTotalPlazas()."\n";
+                  "Cantidad total de plazas: ".$this->getTotalPlazas()."\n".
                   "Cantidad de plazas disponibles: ".$this->getPlazasDisponibles()."\n";
 		return $cadena;
 	}	
