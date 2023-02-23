@@ -85,7 +85,8 @@ class Agencia {
 
     public function paqueteMasEcomomico($fecha, $destino){
         $colPT = $this->getColPT();
-        $precioMasEconomico= 9999999;        
+        $precioMasEconomico= 9999999;
+        $paqueteMasEconomico;
         foreach ($colPT as $unPaqTur){
             if ($unPaqTur->getFechaDesde() == $fecha && $unPaqTur->getDestino() == $destino){
                 $valorPorDia = $unPaqTur->getDestino()->getValorPorDiaYPas();
@@ -171,6 +172,28 @@ class Agencia {
         }else {
             return false;
         }
+    }
+
+    public function promedioVentasOnLine(){
+        $colVentas = $this->getColVentasOL();
+        $cant=0;
+        $total=0;
+        foreach($colVentas as $unaVenta){
+            $total = $total + $unaVenta->darImporteVenta();
+            $cant++;
+        }
+        return $total / $cant;
+    }
+
+    public function promedioVentasAgencia(){
+        $colVentas = $this->getColVentas();
+        $cant=0;
+        $total=0;
+        foreach($colVentas as $unaVenta){
+            $total = $total + $unaVenta->darImporteVenta();
+            $cant++;
+        }
+        return $total / $cant;
     }
 
     public function __toString(){

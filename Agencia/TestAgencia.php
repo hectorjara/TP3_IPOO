@@ -9,7 +9,7 @@ include_once "Agencia.php";
 $destinoBariloche = new Destino("001", "Bariloche", 250);
 //echo $destinoBariloche;
 $paqueteBariloche = new PaqueteTuristico("23-05-2014", 3, $destinoBariloche, 25);//$fechaDesde, $cantDias, $destino, $totalPlazas
-$paqueteBariloche2 = new PaqueteTuristico("3-05-2014", 2, $destinoBariloche, 10);
+$paqueteBariloche2 = new PaqueteTuristico("23-05-2014", 2, $destinoBariloche, 10);
 $paqueteBariloche3 = new PaqueteTuristico("4-05-2014", 4, $destinoBariloche, 15);
 //echo $paqueteBariloche;
 
@@ -48,30 +48,34 @@ if ($precio >= 0){
 
 
 //informarPaquetesTuristicos(fecha,destino):
-$colPTconFechaYDestino = $miAgencia->informarPaquetesTuristicos("3/05/2014", $destinoBariloche);
+$colPTconFechaYDestino = $miAgencia->informarPaquetesTuristicos("23-05-2014", $destinoBariloche);
 foreach ($colPTconFechaYDestino as $unPTFYD){
     echo $unPTFYD;
 }
 
 //paqueteMasEcomomico(fecha,destino)
-echo "El Paquete Turistico mas economico es:\n".$miAgencia->paqueteMasEcomomico("23/05/2014",$destinoBariloche)."\n";
+echo "\nEl Paquete Turistico mas economico es:\n".$miAgencia->paqueteMasEcomomico("23-05-2014",$destinoBariloche)."\n";
 
 echo "Todos los Paquetes Turisticos adquiridos por el Cliente 'DNI = 27898654' son:\n";
 $paquetesTAdquiridos = $miAgencia->informarConsumoCliente("DNI",27898654);
 foreach ($paquetesTAdquiridos as $unPTur){
     echo $unPTur;
 }
-
+// Informar Paquetes Turisticos mas vendidos
 $n = 2; $anio = 2023;
 $col_los_n_mas_vendidos_del_anio = $miAgencia->informarPaquetesMasVendido($anio, $n);
 if ($col_los_n_mas_vendidos_del_anio){
-    echo "Los ".$n." Paquetes Turisticos mas vendidos del año ".$anio." son:\n";
+    echo "\nLos ".$n." Paquetes Turisticos mas vendidos del año ".$anio." son:\n";
     foreach ($col_los_n_mas_vendidos_del_anio as $topAnio){
         echo $topAnio[0]." ".$topAnio[1]. " cantidad de veces vendidas\n";
     }
 }else{
     echo "La cantidad de Paquetes Turisticos no es tan grande como el numero solicitado.";
 }
+// Promedio ventas On Line
+echo "El promedio de Ventas Online realizadas por Mi Agencia es: $".$miAgencia->promedioVentasOnLine()."\n";
+// Promedio ventas en la Agencia
+echo "El promedio de Ventas en la Agencia realizadas por Mi Agencia es: $".$miAgencia->promedioVentasAgencia()."\n";
 
 echo $miAgencia;
 ?>
