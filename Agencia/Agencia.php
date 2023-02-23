@@ -100,6 +100,25 @@ class Agencia {
         return $paqueteMasEconomico;
     }
 
+    public function informarConsumoCliente($tipoDoc, $numDoc){
+        $colVentas = $this->getColVentas();
+        $colPTAdquiridosPorC = array();
+        foreach($colVentas as $unaVenta){
+            if ($unaVenta->getTipoDoc() == $tipoDoc && $unaVenta->getNumDoc() == $numDoc){
+                $paTurComprado = $unaVenta->getObj_PT();
+                array_push($colPTAdquiridosPorC, $paTurComprado); 
+            }
+        }
+        $colVOL = $this->getColVentasOL();
+        foreach($colVOL as $unaVenta){
+            if ($unaVenta->getTipoDoc() == $tipoDoc && $unaVenta->getNumDoc() == $numDoc){
+                $paTurComprado = $unaVenta->getObj_PT();
+                array_push($colPTAdquiridosPorC, $paTurComprado); 
+            }
+        }
+        return $colPTAdquiridosPorC;
+    }
+
     public function __toString(){
 		$cadena = "\nMi Agencia\n**********\n\nPaquetes Turisticos:\n*******************\n";
         foreach($this->getColPT() as $unPT){

@@ -36,11 +36,11 @@ $precio = $miAgencia->incorporarVenta($paqueteBariloche,"DNI",27898654,5, false)
 if ($precio >= 0){
     echo "Venta confirmada. El importe a pagar es: $".$precio."\n";
 }else{echo "No hay plazas suficientes\n";}
-$precio = $miAgencia->incorporarVenta($paqueteBariloche,"DNI",27898654,5, true);
+$precio = $miAgencia->incorporarVenta($paqueteBariloche2,"DNI",27898654,5, false);
 if ($precio >= 0){
     echo "Venta confirmada. El importe a pagar es: $".$precio."\n";
 }else{echo "No hay plazas suficientes\n";}
-$precio = $miAgencia->incorporarVenta($paqueteBariloche,"DNI",27898654,30, false);
+$precio = $miAgencia->incorporarVenta($paqueteBariloche2,"DNI",27898654,30, false);
 if ($precio >= 0){
     echo "Venta confirmada. El importe a pagar es: $".$precio."\n";
 }else{echo "No hay plazas suficientes\n";}
@@ -55,6 +55,10 @@ foreach ($colPTconFechaYDestino as $unPTFYD){
 //paqueteMasEcomomico(fecha,destino)
 echo "El Paquete Turistico mas economico es:\n".$miAgencia->paqueteMasEcomomico("23/05/2014",$destinoBariloche)."\n";
 
-
+echo "Todos los Paquetes Turisticos adquiridos por el Cliente 'DNI = 27898654' son:\n";
+$paquetesTAdquiridos = $miAgencia->informarConsumoCliente("DNI",27898654);
+foreach ($paquetesTAdquiridos as $unPTur){
+    echo $unPTur;
+}
 //echo $miAgencia;
 ?>
