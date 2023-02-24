@@ -1,4 +1,5 @@
 <?php
+include_once "Ventas.php";
 class Local {
 
     private $col_Prod_Imp, $col_Prod_Reg, $col_Ventas;
@@ -28,6 +29,14 @@ class Local {
     }
     public function setcol_Prod_Ventas($col_Ventas) {
         $this->col_Ventas = $col_Ventas;
+    }
+
+    public function ingresarVenta($fecha,$productosVendidos,$cliente){
+        $colVentas = $this->getcol_Prod_Ventas();
+        $nuevaVenta = new Ventas($fecha,$productosVendidos,$cliente);
+        array_push($colVentas, $nuevaVenta);
+        $this->setcol_Prod_Ventas($colVentas);
+        echo "Nueva Venta ingresada";
     }
 
     public function incorporarProductoLocal($obj_Producto){

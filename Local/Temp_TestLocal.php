@@ -2,7 +2,7 @@
 include_once "Rubro.php";
 include_once "ProductoRegional.php";
 include_once "ProductoImportado.php";
-include_once "Ventas.php";
+//include_once "Ventas.php";
 include_once "Local.php";
 include_once "Cliente.php";
 
@@ -24,17 +24,20 @@ $cliente2 = new Cliente("DNI", 12123456);
 $productosVendidos1= [$prod_Tomate, $prod_Robot, $prod_Tomate, $prod_Tomate_Importado];
 $productosVendidos2= [$prod_Tomate, $prod_Robot, $prod_Tomate];
 $productosVendidos3= [$prod_Tomate, $prod_Tomate, $prod_Tomate, $prod_Robot_Importado]; //El lector del codigo barra cada producto uno por uno
+/*
 $venta1 = new Ventas("12-02-2023",$productosVendidos1,$cliente1);
 $venta2 = new Ventas("13-02-2023",$productosVendidos2,$cliente1);
 $venta3 = new Ventas("12-02-2023",$productosVendidos3,$cliente2);
-/*
-echo $venta1;
-echo $venta1->darImporteVenta();
 */
 $col_Prod_Regional = array($prod_Tomate);
-$col_Ventas = array($venta1, $venta2, $venta3);
+//$col_Ventas = array($venta1, $venta2, $venta3);
 
-$miLocal = new Local([], $col_Prod_Regional,$col_Ventas);
+$miLocal = new Local([], $col_Prod_Regional,[]);
+
+$miLocal->ingresarVenta("12-02-2023",$productosVendidos1,$cliente1);
+$miLocal->ingresarVenta("13-02-2023",$productosVendidos2,$cliente1);
+$miLocal->ingresarVenta("12-02-2023",$productosVendidos3,$cliente2);
+
 $miLocal->incorporarProductoLocal($prod_Robot);
 if ($miLocal->incorporarProductoLocal($prod_Tomate_Importado)){
     echo "Producto Incorporado\n";
