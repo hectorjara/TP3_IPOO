@@ -6,6 +6,7 @@ $miTeatro = new Teatro("Mi Teatro", "Corrientes 10000", [], [], []);
 $sigue = "s";
 While ($sigue=="S" || $sigue=="s" ){
     echo $miTeatro;
+    echo "El costo total del uso del Teatro para el mes es: $".$miTeatro->darCostos()."\n\n";
     echo " Que tipo de funcion desea ingresar?\n";
     echo " 1 - Teatro \n";
     echo " 2 - Cine  \n";

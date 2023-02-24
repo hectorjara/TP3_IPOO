@@ -159,6 +159,23 @@ Class Teatro {
 
         }
     }
+    
+    public function darCostos(){
+        $colTeatro = $this->getColFuncionTeatro();
+        $colCine = $this->getColFuncionCine();
+        $colMusical = $this->getColFuncionMusical();
+        $precio = 0;
+        foreach ($colTeatro as $unaFuncion){
+            $precio = $precio + $unaFuncion->getPrecio()*1.45;
+        }
+        foreach ($colCine as $unaFuncion){
+            $precio = $precio + $unaFuncion->getPrecio()*1.65;  
+        }
+        foreach ($colMusical as $unaFuncion){
+            $precio = $precio + $unaFuncion->getPrecio()*1.12;  
+        }
+        return $precio;
+    }
 
 	public function __toString(){
 		$cadena = "Teatro:\n*******\n".
