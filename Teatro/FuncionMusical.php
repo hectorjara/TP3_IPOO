@@ -26,7 +26,7 @@ class FuncionMusical extends Funcion{
 	}
 
 	public function __toString(){
-        $cadena = "Funcion de Cine:\n";
+        $cadena = "Funcion Musical:\n";
 		$cadena.= parent::__toString();
 		$cadena.= "Director: ".$this->getDirector()."\n";
 		$cadena.= "Cantidad de personas en escena: ".$this->getCantPersonas()."\n";
