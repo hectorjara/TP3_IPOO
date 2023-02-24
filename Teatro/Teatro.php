@@ -1,4 +1,7 @@
 <?php
+include_once "Funcion.php";
+include_once "FuncionCine.php";
+include_once "FuncionMusical.php";
 Class Teatro {
 
 	private $nombre, $direccion, $colFuncionTeatro, $colFuncionCine, $colFuncionMusical;
@@ -106,26 +109,54 @@ Class Teatro {
         }
     }
 
-    public function insertarFuncionTeatro(){
+    public function insertarFuncionTeatro($tipoFuncion){
         echo "Ingrese el Nombre de la Funcion >\n";
         $nombreFuncion = trim(fgets(STDIN));
-        echo "Ingrese el horario de inicio de la Funcion >\n";
+        echo "Ingrese el horario de inicio de la Funcion (HH:MM) ej: 12:00 >\n";
         $horarioInicio = trim(fgets(STDIN));
-        echo "Ingrese la duracion de la Funcion >\n";
+        echo "Ingrese la duracion de la Funcion (HH:MM) ej: 02:30 >\n";
         $duracion = trim(fgets(STDIN));
         echo "Ingrese el precio de la Funcion >\n";
         $precio = trim(fgets(STDIN));
 
-        $nuevaFuncion = new Funcion($nombreFuncion, $horarioInicio, $duracion, $precio);
+        if ($tipoFuncion == "Teatro"){
+            $nuevaFuncion = new Funcion($nombreFuncion, $horarioInicio, $duracion, $precio);
+        }elseif($tipoFuncion == "Cine"){
+            echo "Ingrese el genero de la pelicula >\n";
+            $genero = trim(fgets(STDIN));
+            echo "Ingrese el pais de origen de la pelicula >\n";
+            $paisOrigen = trim(fgets(STDIN));
+            $nuevaFuncion = new FuncionCine($nombreFuncion, $horarioInicio, $duracion, $precio, $genero, $paisOrigen);
+        }elseif($tipoFuncion == "Musical"){
+            echo "Ingrese el director del musical >\n";
+            $director = trim(fgets(STDIN));
+            echo "Ingrese la cantidad de personas en escena >\n";
+            $cantPersonas = trim(fgets(STDIN));
+            $nuevaFuncion = new FuncionMusical($nombreFuncion, $horarioInicio, $duracion, $precio, $director, $cantPersonas);
+
+        }
         $horariosSeIntersectan = $this->verificarHorario($nuevaFuncion);
         
         if ($horariosSeIntersectan){
             echo "Eliga otro horario y duracion. Observe la lista de funciones\n";
         }else{
-            $colFuncionTeatro = $this->getColFuncionTeatro();
-            array_push($colFuncionTeatro, $nuevaFuncion);
-            $this->setColFuncionTeatro($colFuncionTeatro);
-            echo "La nueva Funcion de Teatro ha sido ingresada con exito.\n";
+            if($tipoFuncion == "Teatro"){
+                $colFuncionTeatro = $this->getColFuncionTeatro();
+                array_push($colFuncionTeatro, $nuevaFuncion);
+                $this->setColFuncionTeatro($colFuncionTeatro);
+                echo "La nueva Funcion de Teatro ha sido ingresada con exito.\n";
+            }elseif($tipoFuncion == "Cine"){
+                $colFuncionCine = $this->getColFuncionMusical();
+                array_push($colFuncionCine, $nuevaFuncion);
+                $this->setColFuncionCine($colFuncionCine);
+                echo "La nueva Funcion de Cine ha sido ingresada con exito.\n";   
+            }elseif($tipoFuncion == "Musical"){
+                $colFuncionMusical = $this->getColFuncionMusical();
+                array_push($colFuncionMusical, $nuevaFuncion);
+                $this->setColFuncionMusical($colFuncionMusical);
+                echo "La nueva Funcion de Musical ha sido ingresada con exito.\n";   
+            }
+
         }
     }
 

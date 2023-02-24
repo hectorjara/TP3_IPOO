@@ -1,11 +1,11 @@
 <?php
 include_once "Teatro.php";
-include_once "Funcion.php";
 
 $miTeatro = new Teatro("Mi Teatro", "Corrientes 10000", [], [], []);
 
 $sigue = "s";
 While ($sigue=="S" || $sigue=="s" ){
+    echo $miTeatro;
     echo " Que tipo de funcion desea ingresar?\n";
     echo " 1 - Teatro \n";
     echo " 2 - Cine  \n";
@@ -14,15 +14,15 @@ While ($sigue=="S" || $sigue=="s" ){
     $op = trim(fgets(STDIN));
     
     if ($op==1){
-        $miTeatro->insertarFuncionTeatro();
+        $miTeatro->insertarFuncionTeatro("Teatro");
     }
 
-    if ($op==2 && $mAbmSector){
-        $miTeatro->insertarFuncionTeatro();
+    if ($op==2){
+        $miTeatro->insertarFuncionTeatro("Cine");
     }	
     
-    if ($op==3 && $mAbmEmpleados){
-        $miTeatro->insertarFuncionTeatro();
+    if ($op==3){
+        $miTeatro->insertarFuncionTeatro("Musical");
     }else
     
     if ($op==7){
@@ -31,6 +31,6 @@ While ($sigue=="S" || $sigue=="s" ){
     echo " Desea realizar otra operacion? S/s \n";
     $sigue = trim(fgets(STDIN));
 }
-echo $miTeatro;
+
 
 ?>

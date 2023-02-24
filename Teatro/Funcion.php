@@ -52,8 +52,7 @@ Class Funcion {
 	}
 
 	public function __toString(){
-		$cadena = "Funcion:\n*******\n".
-                  "Nombre: ". $this->getNombre()."\n".
+		$cadena = "Nombre: ". $this->getNombre()."\n".
                   "Horario de inicio: ".$this->getHorarioInicio()."\n".
                   "Duracion: ".$this->getDuracion()."\n".
                   "Precio: ".$this->getPrecio()."\n";
